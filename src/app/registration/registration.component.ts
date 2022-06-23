@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegistrationComponent implements OnInit {
 
   registrationForm:FormGroup;
+  issubmit:boolean = false;
 
 
   constructor(private fb: FormBuilder) {
@@ -32,6 +33,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(registration:any){
+    this.issubmit= true;
       console.log(registration);
   }
 
