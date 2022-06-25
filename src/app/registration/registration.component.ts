@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RegistrationService } from '../services/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -10,9 +11,10 @@ export class RegistrationComponent implements OnInit {
 
   registrationForm:FormGroup;
   issubmit:boolean = false;
+  issuccess:boolean = false;
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private registrationService: RegistrationService) {
    }
 
   ngOnInit(): void {
@@ -29,12 +31,28 @@ export class RegistrationComponent implements OnInit {
       village:['',Validators.required],
       address:['',Validators.required],
       pollitical:[''],
+      about:[''],
+      election1:[''],
+      election2:[''],
+      election3:[''],
+      election4:[''],
+      election5:[''],
     })
   }
 
-  onSubmit(registration:any){
+  onSubmit(registration:FormGroup){
     this.issubmit= true;
-      console.log(registration);
+    console.log(registration);
+    if(this.registrationForm.valid){
+      this.registrationService.register(registration.value).subscribe((data:any)=>{
+        if(data.result == true){
+            this.issuccess = true;
+            this.registrationForm.reset();
+            this.issubmit = false;
+        }
+      }) 
+    }
+    
   }
 
 }

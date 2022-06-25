@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<br>
+<br>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Sr</th>
+        <th scope="col">UUID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Age</th>
+        <th scope="col">Caste</th>
+        <th scope="col">Occupation</th>
+        <th scope="col">Constituency</th>
+        <th scope="col">Viilage</th>
+        <th scope="col">Address</th>
+        <th scope="col">pollitically Active</th>
+        <th scope="col" colspan="5">Election Prefrences</th> 
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of this.search;let sr=index">
+        <th scope="row">{{sr+1}}</th>
+        <td>{{record.uuid}}</td>
+        <td>{{record.fname+" "+record.mname+" "+record.lname}}</td>
+        <td>{{record.gender}}</td>
+        <td>{{record.age}}</td>
+        <td>{{record.caste}}</td>
+        <td>{{record.occupation}}</td>
+        <td>{{record.constituency}}</td>
+        <td>{{record.village}}</td>
+        <td>{{record.address}}</td>
+        <td>{{record.pollitical}}</td>
+        <td>{{record.election1}}</td>
+        <td>{{record.election2}}</td>
+        <td>{{record.election3}}</td>
+        <td>{{record.election4}}</td>
+        <td>{{record.election5}}</td>
+
+        </tr>
+    </tbody>
+  </table>

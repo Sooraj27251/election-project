@@ -4,12 +4,14 @@ import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },
   { path: 'registration', component: RegistrationComponent, canActivate:[AuthGuard] },
+  { path: 'search', component: SearchComponent, canActivate:[AuthGuard] },
 ];
 
 @NgModule({
