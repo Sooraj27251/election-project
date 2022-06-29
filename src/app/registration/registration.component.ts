@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { range } from 'rxjs';
 import { RegistrationService } from '../services/registration.service';
 
 @Component({
@@ -20,18 +21,19 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
 
     this.registrationForm = this.fb.group({
-      fname:['',Validators.required],
+      fname:[''],
       mname:[''],
-      lname:['',Validators.required],
-      gender:['',Validators.required],
-      age:['',Validators.required],
-      caste:['',Validators.required],
-      occupation:['',Validators.required],
-      constituency:['',Validators.required],
-      village:['',Validators.required],
-      address:['',Validators.required],
+      lname:[''],
+      gender:[''],
+      age:['',range(0,999)],
+      caste:[''],
+      occupation:[''],
+      constituency:[''],
+      village:[''],
+      address:[''],
       pollitical:[''],
       about:[''],
+      polliticalParty:[''],
       election1:[''],
       election2:[''],
       election3:[''],

@@ -1,42 +1,147 @@
 <app-navbar></app-navbar>
-<br>
-<br>
-<table class="table table-bordered">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Sr</th>
-        <th scope="col">UUID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Age</th>
-        <th scope="col">Caste</th>
-        <th scope="col">Occupation</th>
-        <th scope="col">Constituency</th>
-        <th scope="col">Viilage</th>
-        <th scope="col">Address</th>
-        <th scope="col">pollitically Active</th>
-        <th scope="col" colspan="5">Election Prefrences</th> 
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let record of this.search;let sr=index">
-        <th scope="row">{{sr+1}}</th>
-        <td>{{record.uuid}}</td>
-        <td>{{record.fname+" "+record.mname+" "+record.lname}}</td>
-        <td>{{record.gender}}</td>
-        <td>{{record.age}}</td>
-        <td>{{record.caste}}</td>
-        <td>{{record.occupation}}</td>
-        <td>{{record.constituency}}</td>
-        <td>{{record.village}}</td>
-        <td>{{record.address}}</td>
-        <td>{{record.pollitical}}</td>
-        <td>{{record.election1}}</td>
-        <td>{{record.election2}}</td>
-        <td>{{record.election3}}</td>
-        <td>{{record.election4}}</td>
-        <td>{{record.election5}}</td>
+<div
+  class="shadow p-3 mb-5 bg-white rounded col-md-11"
+  style="margin: auto; margin-top: 2%"
+>
+  <div class="col-xs-1 center-block text-center" style="color: gray">
+    <h2>Search</h2>
+  </div>
+  <form [formGroup]="search" (ngSubmit)="onSubmit(search)">
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="uuid">UUID</label>
+        <input
+          formControlName="uuid"
+          class="form-control"
+          placeholder="Enter UUID"
+        />
+      </div>
 
-        </tr>
-    </tbody>
-  </table>
+      <div class="form-group col-md-3">
+        <label for="uuid">First Name</label>
+        <input
+          formControlName="fname"
+          class="form-control"
+          placeholder="Enter First Name"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="uuid">Middle Name</label>
+        <input
+          formControlName="mname"
+          class="form-control"
+          placeholder="Enter Middle Name"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="uuid">Last Name</label>
+        <input
+          formControlName="lname"
+          class="form-control"
+          placeholder="Enter Last Name"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <label for="age">Age</label>
+        <div class="row">
+          <div class="col-sm-2">From</div>
+          <div class="col-sm-4">
+            <input class="form-control" type="number" />
+          </div>
+          <div class="col-sm-2">To</div>
+          <div class="col-sm-4">
+            <input class="form-control" type="number" />
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="gender">Gender</label>
+        <select class="form-control" formControlName="gender">
+          <option value="" selected>---Select Gender---</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="caste">Caste</label>
+        <input
+          formControlName="caste"
+          class="form-control"
+          placeholder="Enter Caste"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="occupation">Last Name</label>
+        <input
+          formControlName="occupation"
+          class="form-control"
+          placeholder="Enter Occupation"
+        />
+      </div>
+      <div></div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3"> 
+        <label for="constituency">Constituency</label>
+        <input class="form-control" placeholder="Enter Constituency" type="text">
+      </div>
+      <div class="form-group col-md-3"> 
+        <label for="village">Village</label>
+        <input class="form-control" placeholder="Enter Village" type="text">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        Pollitically Active
+      </div>
+      <div class="col-md-4">
+        <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault">
+      </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">submit</button>
+  </form>
+</div>
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Sr</th>
+      <th scope="col">UUID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Age</th>
+      <th scope="col">Caste</th>
+      <th scope="col">Occupation</th>
+      <th scope="col">Constituency</th>
+      <th scope="col">Viilage</th>
+      <th scope="col">Address</th>
+      <th scope="col">pollitically Active</th>
+      <th scope="col">Party</th>
+      <th scope="col" colspan="5">Election Prefrences</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let record of this.searchResult; let sr = index">
+      <th scope="row">{{ sr + 1 }}</th>
+      <td>{{ record.uuid }}</td>
+      <td>{{ record.fname + " " + record.mname + " " + record.lname }}</td>
+      <td>{{ record.gender }}</td>
+      <td>{{ record.age }}</td>
+      <td>{{ record.caste }}</td>
+      <td>{{ record.occupation }}</td>
+      <td>{{ record.constituency }}</td>
+      <td>{{ record.village }}</td>
+      <td>{{ record.address }}</td>
+      <td>{{ record.pollitical }}</td>
+      <td>{{ record.party }}</td>
+      <td>{{ record.election1 }}</td>
+      <td>{{ record.election2 }}</td>
+      <td>{{ record.election3 }}</td>
+      <td>{{ record.election4 }}</td>
+      <td>{{ record.election5 }}</td>
+    </tr>
+  </tbody>
+</table>
