@@ -13,19 +13,44 @@ export class SearchComponent implements OnInit {
 
   search:FormGroup;
   searchResult:any;
+  showTable:boolean = false;
+  ResultNotFound:boolean = false;
 
   ngOnInit(): void {
     
     this.search = this.fb.group({
-      name:['']
+      uuid:[''],
+      fname:[''],
+      mname:[''],
+      lname:[''],
+      fromAge:[''],
+      toAge:[''],
+      gender:[''],
+      caste:[''],
+      occupation:[''],
+      constituency:[''],
+      polliticalParty:[''],
+      village:[''],
+      pollitical:['']
     });
       
   }
 
   onSubmit(search:FormGroup){
-    this.service.search().subscribe((data:any)=>{
-      this.searchResult = data;
+    console.log(search.value)
+    this.ResultNotFound = false;
+    this.showTable = false;
+    this.service.search(search.value).subscribe((data:any)=>{
+      if(data==false){
+        this.ResultNotFound = true;
+      }else{
+        this.showTable = true;
+        this.searchResult = data;
+      }
     })
   }
 
+  clearTable():void{
+    this.showTable = false;
+  }
 }

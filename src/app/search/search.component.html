@@ -48,11 +48,11 @@
         <div class="row">
           <div class="col-sm-2">From</div>
           <div class="col-sm-4">
-            <input class="form-control" type="number" />
+            <input formControlName="fromAge" class="form-control" type="number" />
           </div>
           <div class="col-sm-2">To</div>
           <div class="col-sm-4">
-            <input class="form-control" type="number" />
+            <input formControlName="toAge" class="form-control" type="number" />
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
         />
       </div>
       <div class="form-group col-md-3">
-        <label for="occupation">Last Name</label>
+        <label for="occupation">Occupation</label>
         <input
           formControlName="occupation"
           class="form-control"
@@ -86,62 +86,94 @@
     <div class="row">
       <div class="form-group col-md-3"> 
         <label for="constituency">Constituency</label>
-        <input class="form-control" placeholder="Enter Constituency" type="text">
+        <input formControlName="constituency" class="form-control" placeholder="Enter Constituency" type="text">
       </div>
       <div class="form-group col-md-3"> 
         <label for="village">Village</label>
-        <input class="form-control" placeholder="Enter Village" type="text">
+        <input formControlName="village" class="form-control" placeholder="Enter Village" type="text">
+      </div>
+      <div class="form-group col-md-3"> 
+        <label for="polliticalParty">Pollitical Party</label>
+              <select class="form-control" formControlName="polliticalParty" >
+                <option value="" selected>---Select Pollitical Party---</option>
+                <option value="BJP">Bharatiya Janata Party (BJP)</option>
+                <option value="SS">Shiv Sena</option>
+                <option value="NCP">Nationalist Congress Party (NCP)</option>
+                <option value="INC">Indian National Congress (INC)</option>
+                <option value="SP">Samajwadi Party (SP)</option>
+                <option value="MNS">Maharashtra Navnirman Sena (MNS)</option>
+                <option value="PWP">Peasants and Workers Party of India</option>
+                <option value="CPI">Communist Party of India (CPI)</option>
+                <option value="MIM">All India Majlis-e-Ittehadul Muslimeen</option>
+                <option value="CP">Communist Party of India (Marxist)</option>
+                <option value="RPI">Republican Party of India</option>
+                <option value="AAP">Aam Adami Party</option>
+              </select>  
+
+      </div>
+
+      <div class="col-md-3">
+        <label for="pollitical">Pollitically Active</label>
+        <select class="form-control" formControlName = "pollitical">
+          <option selected value="">---Select Option---</option>
+          <option value="YES">Yes</option>
+          <option value="NO">No</option>
+        </select>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-2">
-        Pollitically Active
-      </div>
-      <div class="col-md-4">
-        <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault">
-      </div>
-    </div>
+    
+      
     <br>
-    <button type="submit" class="btn btn-primary">submit</button>
+    <div class="row form-group">
+      <div class="col-sm-11">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+      <div class="col-sm-1">
+        <button type="reset" class="btn btn-danger" (click)="clearTable()">Clear</button>
+      </div>
+      
+    </div>
   </form>
 </div>
-<table class="table table-bordered">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Sr</th>
-      <th scope="col">UUID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Gender</th>
-      <th scope="col">Age</th>
-      <th scope="col">Caste</th>
-      <th scope="col">Occupation</th>
-      <th scope="col">Constituency</th>
-      <th scope="col">Viilage</th>
-      <th scope="col">Address</th>
-      <th scope="col">pollitically Active</th>
-      <th scope="col">Party</th>
-      <th scope="col" colspan="5">Election Prefrences</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let record of this.searchResult; let sr = index">
-      <th scope="row">{{ sr + 1 }}</th>
-      <td>{{ record.uuid }}</td>
-      <td>{{ record.fname + " " + record.mname + " " + record.lname }}</td>
-      <td>{{ record.gender }}</td>
-      <td>{{ record.age }}</td>
-      <td>{{ record.caste }}</td>
-      <td>{{ record.occupation }}</td>
-      <td>{{ record.constituency }}</td>
-      <td>{{ record.village }}</td>
-      <td>{{ record.address }}</td>
-      <td>{{ record.pollitical }}</td>
-      <td>{{ record.party }}</td>
-      <td>{{ record.election1 }}</td>
-      <td>{{ record.election2 }}</td>
-      <td>{{ record.election3 }}</td>
-      <td>{{ record.election4 }}</td>
-      <td>{{ record.election5 }}</td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="this.showTable" >  
+  <table id="table" class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Sr</th>
+        <th scope="col">UUID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Age</th>
+        <th scope="col">Caste</th>
+        <th scope="col">Occupation</th>
+        <th scope="col">Constituency</th>
+        <th scope="col">Viilage</th>
+        <th scope="col">Address</th>
+        <th scope="col">pollitically Active</th>
+        <th scope="col">Party</th>
+        <th scope="col" colspan="5">Election Prefrences</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of this.searchResult; let sr = index">
+        <th scope="row">{{ sr + 1 }}</th>
+        <td>{{ record.uuid }}</td>
+        <td>{{ record.fname + " " + record.mname + " " + record.lname }}</td>
+        <td>{{ record.gender }}</td>
+        <td>{{ record.age }}</td>
+        <td>{{ record.caste }}</td>
+        <td>{{ record.occupation }}</td>
+        <td>{{ record.constituency }}</td>
+        <td>{{ record.village }}</td>
+        <td>{{ record.address }}</td>
+        <td>{{ record.pollitical }}</td>
+        <td>{{ record.party }}</td>
+        <td>{{ record.election1 }}</td>
+        <td>{{ record.election2 }}</td>
+        <td>{{ record.election3 }}</td>
+        <td>{{ record.election4 }}</td>
+        <td>{{ record.election5 }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

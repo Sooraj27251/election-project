@@ -8,3 +8,8 @@ table tbody thead{
     display: table;
     width: 100%;
 }
+
+p {
+    font-family: Lato;
+    font-size: 15px;
+  }
