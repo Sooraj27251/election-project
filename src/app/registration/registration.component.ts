@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { range } from 'rxjs';
+import { DropDownService } from '../services/drop-down.service';
 import { RegistrationService } from '../services/registration.service';
 
 @Component({
@@ -13,21 +14,33 @@ export class RegistrationComponent implements OnInit {
   registrationForm:FormGroup;
   issubmit:boolean = false;
   issuccess:boolean = false;
+  districts: Array<String> = [];
+  constituencies: Array<String> = [];
+  district:any = '';
 
-
-  constructor(private fb: FormBuilder, private registrationService: RegistrationService) {
+  constructor(private fb: FormBuilder, private registrationService: RegistrationService,private dropservice:DropDownService) {
    }
 
   ngOnInit(): void {
 
+    this.dropservice.getDistrict().subscribe((data: any) => {
+      for (let obj of data) {
+        for (let key in obj) {
+          this.districts.push(obj[key]);
+        }
+      }
+    });
+
+
     this.registrationForm = this.fb.group({
-      fname:[''],
-      mname:[''],
-      lname:[''],
+      fname:['',Validators.required],
+      mname:['' ],
+      lname:['',Validators.required],
       gender:[''],
       age:['',range(0,999)],
       caste:[''],
       occupation:[''],
+      district:[''],
       constituency:[''],
       village:[''],
       address:[''],
@@ -42,9 +55,23 @@ export class RegistrationComponent implements OnInit {
     })
   }
 
+
+  get form(): { [key: string]: AbstractControl } {
+    return this.registrationForm.controls;
+  }
+
+  getData(){
+    this.dropservice.getConstituency(this.district).subscribe((data:any)=>{
+      for (let obj of data) {
+        for (let key in obj) {
+          this.constituencies.push(obj[key]);
+        }
+      }
+    })
+  }
   onSubmit(registration:FormGroup){
     this.issubmit= true;
-    console.log(registration);
+    this.constituencies = [];
     if(this.registrationForm.valid){
       this.registrationService.register(registration.value).subscribe((data:any)=>{
         if(data.result == true){

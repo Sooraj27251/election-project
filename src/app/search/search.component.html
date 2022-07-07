@@ -85,8 +85,16 @@
     </div>
     <div class="row">
       <div class="form-group col-md-3"> 
-        <label for="constituency">Constituency</label>
-        <input formControlName="constituency" class="form-control" placeholder="Enter Constituency" type="text">
+        <label>Select Constituency</label>
+        <select
+          class="form-control"
+         formControlName = "constituency"
+        >
+          <option value ='' selected>---Select Constituency---</option>
+          <option *ngFor="let title of constituencies" [value]="title">
+            {{ title }}
+          </option>
+        </select>      
       </div>
       <div class="form-group col-md-3"> 
         <label for="village">Village</label>
@@ -135,45 +143,79 @@
     </div>
   </form>
 </div>
-<div *ngIf="this.showTable" >  
-  <table id="table" class="table table-striped table-bordered">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Sr</th>
-        <th scope="col">UUID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Age</th>
-        <th scope="col">Caste</th>
-        <th scope="col">Occupation</th>
-        <th scope="col">Constituency</th>
-        <th scope="col">Viilage</th>
-        <th scope="col">Address</th>
-        <th scope="col">pollitically Active</th>
-        <th scope="col">Party</th>
-        <th scope="col" colspan="5">Election Prefrences</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let record of this.searchResult; let sr = index">
-        <th scope="row">{{ sr + 1 }}</th>
-        <td>{{ record.uuid }}</td>
-        <td>{{ record.fname + " " + record.mname + " " + record.lname }}</td>
-        <td>{{ record.gender }}</td>
-        <td>{{ record.age }}</td>
-        <td>{{ record.caste }}</td>
-        <td>{{ record.occupation }}</td>
-        <td>{{ record.constituency }}</td>
-        <td>{{ record.village }}</td>
-        <td>{{ record.address }}</td>
-        <td>{{ record.pollitical }}</td>
-        <td>{{ record.party }}</td>
-        <td>{{ record.election1 }}</td>
-        <td>{{ record.election2 }}</td>
-        <td>{{ record.election3 }}</td>
-        <td>{{ record.election4 }}</td>
-        <td>{{ record.election5 }}</td>
-      </tr>
-    </tbody>
+
+<div class="table table-striped table-bordered " >
+  <table mat-table [dataSource]="dataSource"  *ngIf="this.showTable">
+
+    <!-- Position Column-->
+    <ng-container matColumnDef="uuid">
+      <th mat-header-cell *matHeaderCellDef> UUID </th>
+      <td mat-cell *matCellDef="let element"> {{element.uuid}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.fname+" " +element.mname+" "+element.lname}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef> Gender </th>
+      <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef> Age </th>
+      <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="caste">
+      <th mat-header-cell *matHeaderCellDef> Caste </th>
+      <td mat-cell *matCellDef="let element"> {{element.caste}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="occupation">
+      <th mat-header-cell *matHeaderCellDef> Occupation </th>
+      <td mat-cell *matCellDef="let element"> {{element.occupation}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="constituency">
+      <th mat-header-cell *matHeaderCellDef> Constituency </th>
+      <td mat-cell *matCellDef="let element"> {{element.constituency}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="village">
+      <th mat-header-cell *matHeaderCellDef> Village </th>
+      <td mat-cell *matCellDef="let element"> {{element.village}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Address </th>
+      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pollitical">
+      <th mat-header-cell *matHeaderCellDef> Pollitical </th>
+      <td mat-cell *matCellDef="let element"> {{element.pollitical}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="party">
+      <th mat-header-cell *matHeaderCellDef> Party </th>
+      <td mat-cell *matCellDef="let element"> {{element.party}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="electionPrefrences">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="5"> Election Prefrence </th>
+      <td mat-cell *matCellDef="let element"> {{element.election1+"    "+element.election2+"    "+element.election3+"    "+element.election4+"    "+element.election5}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <mat-paginator [pageSizeOptions]="[25]"
+                 showFirstLastButtons>
+  </mat-paginator>
 </div>

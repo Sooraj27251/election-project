@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SearchService } from '../services/search.service';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'app-search',
@@ -8,16 +11,30 @@ import { SearchService } from '../services/search.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private service:SearchService, private fb:FormBuilder) { }
+  constructor(private service:SearchService, private fb:FormBuilder, private dashboardservice:DashboardService) { }
 
   search:FormGroup;
   searchResult:any;
   showTable:boolean = false;
+  dataSource:any;
   ResultNotFound:boolean = false;
+  constituencies: Array<String> = [];
 
+  displayedColumns: string[] = ['uuid', 'name','gender',
+  'age','caste','occupation','constituency','village','address','pollitical','party','electionPrefrences'];
+
+  
   ngOnInit(): void {
-    
+    this.dashboardservice.getConstituency().subscribe((data: any) => {
+      for (let obj of data) {
+        for (let key in obj) {
+          this.constituencies.push(obj[key]);
+        }
+      }
+    });
     this.search = this.fb.group({
       uuid:[''],
       fname:[''],
@@ -46,6 +63,8 @@ export class SearchComponent implements OnInit {
       }else{
         this.showTable = true;
         this.searchResult = data;
+        this.dataSource = new MatTableDataSource(this.searchResult);
+        this.dataSource.paginator = this.paginator;
       }
     })
   }
@@ -53,4 +72,6 @@ export class SearchComponent implements OnInit {
   clearTable():void{
     this.showTable = false;
   }
+
+
 }

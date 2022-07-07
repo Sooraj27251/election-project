@@ -17,7 +17,12 @@
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="fname">First Name</label>
-          <input type="text" formControlName="fname" class="form-control" id="fname" placeholder="First Name">
+          <input type="text" formControlName="fname" class="form-control" id="fname" placeholder="First Name"
+          [ngClass]="{ 'is-invalid': issubmit && form.fname.errors }"
+          >
+          <div *ngIf="issubmit && form.fname.errors" class="invalid-feedback">
+            <div *ngIf="form.fname.errors.required">First name is required</div>
+          </div>
         </div>
         <div class="form-group col-md-4">
           <label for="mname">Middle Name</label>
@@ -25,7 +30,10 @@
         </div>
         <div class="form-group col-md-4">
           <label for="lname">Last Name</label>
-          <input type="text" formControlName="lname" class="form-control" id="lname" placeholder="Last Name">
+          <input type="text" formControlName="lname" class="form-control" id="lname" placeholder="Last Name" [ngClass]="{ 'is-invalid': issubmit && form.lname.errors }">
+          <div *ngIf="issubmit && form.lname.errors" class="invalid-feedback">
+            <div *ngIf="form.lname.errors.required">Last name is required</div>
+          </div>
         </div>
       </div>
       <div class="form-row">
@@ -55,13 +63,24 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
+          <label for="disctrict">District</label>
+          <select class="form-control" formControlName = "district" [(ngModel)]="district" (ngModelChange)="getData()">
+          <option value ='' selected>---Select District---</option>
+          <option *ngFor="let title of districts" [value]="title">{{ title }}</option>
+        </select>
+        </div>
+        <div class="form-group col-md-4">
           <label for="constituency">Constituency</label>
-          <input type="text" formControlName = "constituency" class="form-control" placeholder="Constituency">
+          <select class="form-control" formControlName = "constituency">
+            <option value ='' selected>---Select Constituency---</option>
+            <option *ngFor="let title of constituencies" [value]="title">{{ title }}</option>
+          </select>
         </div>
         <div class="form-group col-md-4">
           <label for="village">Village</label>
           <input type="text" formControlName = "village" class="form-control" placeholder="Village">
         </div>
+        
       </div>
       <div class="form-row">
         <div class="form-group col-md-12">
