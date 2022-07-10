@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SearchService } from '../services/search.service';
 import {MatPaginator} from '@angular/material/paginator';
@@ -12,9 +12,9 @@ import { DashboardService } from '../services/dashboard.service';
 })
 export class SearchComponent implements OnInit {
   
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-  constructor(private service:SearchService, private fb:FormBuilder, private dashboardservice:DashboardService) { }
+  constructor(private service:SearchService, private fb:FormBuilder, private dashboardservice:DashboardService,private cd: ChangeDetectorRef) { }
 
   search:FormGroup;
   searchResult:any;
@@ -61,12 +61,13 @@ export class SearchComponent implements OnInit {
       if(data==false){
         this.ResultNotFound = true;
       }else{
-        this.showTable = true;
         this.searchResult = data;
         this.dataSource = new MatTableDataSource(this.searchResult);
+        this.showTable = true;
+        this.cd.detectChanges();
         this.dataSource.paginator = this.paginator;
       }
-    })
+    });
   }
 
   clearTable():void{
