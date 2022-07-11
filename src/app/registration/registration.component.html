@@ -8,9 +8,8 @@
   </div>
 </div>
 
-
 <div class="row">
-  <div class="shadow p-3 mb-5 bg-white rounded col-sm-11" style="margin: auto; margin-top: 2%">
+  <div class="shadow p-3 mb-5 bg-white rounded col-md-11" style="margin: auto; margin-top: 2%">
     <div class="col-xs-1 center-block text-center" style="color: gray">
       <h2>Registration</h2>
     </div>
@@ -18,9 +17,11 @@
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="fname">First Name</label>
-          <input type="text" formControlName="fname" class="form-control" id="fname" placeholder="First Name">
-          <div class="validationError" *ngIf="issubmit && registrationForm.controls.fname.errors">
-            Please enter first name
+          <input type="text" formControlName="fname" class="form-control" id="fname" placeholder="First Name"
+          [ngClass]="{ 'is-invalid': issubmit && form.fname.errors }"
+          >
+          <div *ngIf="issubmit && form.fname.errors" class="invalid-feedback">
+            <div *ngIf="form.fname.errors.required">First name is required</div>
           </div>
         </div>
         <div class="form-group col-md-4">
@@ -29,87 +30,63 @@
         </div>
         <div class="form-group col-md-4">
           <label for="lname">Last Name</label>
-          <input type="text" formControlName="lname" class="form-control" id="lname" placeholder="Last Name">
-          <div class="validationError" *ngIf="issubmit && registrationForm.controls.lname.errors">
-            Please enter last name
+          <input type="text" formControlName="lname" class="form-control" id="lname" placeholder="Last Name" [ngClass]="{ 'is-invalid': issubmit && form.lname.errors }">
+          <div *ngIf="issubmit && form.lname.errors" class="invalid-feedback">
+            <div *ngIf="form.lname.errors.required">Last name is required</div>
           </div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="gender">Gender</label>
-          <select formControlName="gender" id="gender" class="form-control">
-            <option selected>Select Gender</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Others</option>
-          </select>
-          <div class="validationError" *ngIf="issubmit && registrationForm.controls.gender.errors">
-            Please select gender
-          </div>
+          <select class="form-control" formControlName="gender" >
+            <option value="" selected>---Select Gender---</option>
+            <option value="Male" >Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>  
         </div>
         <div class="form-group col-md-4">
           <label for="age">Age</label>
-          <input type="number" formControlName="age" class="form-control" id="age">
-          <div class="validationError" *ngIf="issubmit && registrationForm.controls.age.errors">
-            Please select age
-          </div>
+          <input type="number" formControlName="age" class="form-control" id="age" placeholder="Age">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="caste">Caste</label>
-          <select formControlName="caste" id="caste" class="form-control">
-            <option selected>Select Caste</option>
-            <option>OPEN</option>
-            <option>OBC</option>
-            <option>SC/ST</option>
-          </select>
+          <input type="text" formControlName = "caste" class="form-control" id="caste" placeholder="Caste"> 
         </div>
         <div class="form-group col-md-4">
           <label for="occupation">Occupation</label>
-          <select formControlName="occupation" id="occupation" class="form-control">
-            <option selected>Select Occuparion</option>
-            <option>Engineer</option>
-            <option>Doctor</option>
-            <option>Farmer</option>
-          </select>
+          <input type="text" formControlName = "occupation" class="form-control" placeholder="Occupation">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
+          <label for="disctrict">District</label>
+          <select class="form-control" formControlName = "district" [(ngModel)]="district" (ngModelChange)="getData()">
+          <option value ='' selected>---Select District---</option>
+          <option *ngFor="let title of districts" [value]="title">{{ title }}</option>
+        </select>
+        </div>
+        <div class="form-group col-md-4">
           <label for="constituency">Constituency</label>
-          <select formControlName="constituency" id="constituency" class="form-control">
-            <option selected>Select Constituency</option>
-            <option>Ahmednagar</option>
-            <option>Pune</option>
-            <option>Latur</option>
+          <select class="form-control" formControlName = "constituency">
+            <option value ='' selected>---Select Constituency---</option>
+            <option *ngFor="let title of constituencies" [value]="title">{{ title }}</option>
           </select>
-          <div class="validationError" *ngIf="issubmit && registrationForm.controls.constituency.errors">
-            Please select constituency
-          </div>
         </div>
         <div class="form-group col-md-4">
           <label for="village">Village</label>
-          <select formControlName="village" id="village" class="form-control">
-            <option selected>Select Village</option>
-            <option>Vambori</option>
-            <option>Wagholi</option>
-            <option>Pimpri</option>
-          </select>
-          <div class="validationError" *ngIf="issubmit && registrationForm.controls.village.errors">
-            Please select village
-          </div>
+          <input type="text" formControlName = "village" class="form-control" placeholder="Village">
         </div>
+        
       </div>
       <div class="form-row">
         <div class="form-group col-md-12">
           <label for="address">Address</label>
           <input type="text" formControlName="address" class="form-control" id="address"
             placeholder="Please Enter Address">
-          <div class="validationError" *ngIf="issubmit && registrationForm.controls.address.errors">
-            Please enter address
-          </div>
         </div>
       </div>
 
@@ -123,6 +100,28 @@
         </div>
       </div>
       <div *ngIf="this.registrationForm.value.pollitical == true">
+
+        <div class="form-row">
+          <div class="form-group col-md-4">
+              <label for="polliticalParty">Pollitical Party</label>
+              <select class="form-control" formControlName="polliticalParty" >
+                <option value="" selected>---Select Pollitical Party---</option>
+                <option value="BJP">Bharatiya Janata Party (BJP)</option>
+                <option value="SS">Shiv Sena</option>
+                <option value="NCP">Nationalist Congress Party (NCP)</option>
+                <option value="INC">Indian National Congress (INC)</option>
+                <option value="SP">Samajwadi Party (SP)</option>
+                <option value="MNS">Maharashtra Navnirman Sena (MNS)</option>
+                <option value="PWP">Peasants and Workers Party of India</option>
+                <option value="CPI">Communist Party of India (CPI)</option>
+                <option value="MIM">All India Majlis-e-Ittehadul Muslimeen</option>
+                <option value="CP">Communist Party of India (Marxist)</option>
+                <option value="RPI">Republican Party of India</option>
+                <option value="AAP">Aam Adami Party</option>
+              </select>  
+          </div>
+        </div>
+
         <div class="form-row">
           <div class="form-group col-md-12">
             <label for="about">About Infromation</label>
@@ -134,23 +133,93 @@
 
         <div class="form-group col-md-4">
           <label for="election1">Election 1</label>
-          <input formControlName = "election1" class="form-control" type="text" id="election1">
+          <select class="form-control" formControlName="election1" >
+            <option value="" selected>---Select Pollitical Party---</option>
+            <option value="BJP">Bharatiya Janata Party (BJP)</option>
+            <option value="SS">Shiv Sena</option>
+            <option value="NCP">Nationalist Congress Party (NCP)</option>
+            <option value="INC">Indian National Congress (INC)</option>
+            <option value="SP">Samajwadi Party (SP)</option>
+            <option value="MNS">Maharashtra Navnirman Sena (MNS)</option>
+            <option value="PWP">Peasants and Workers Party of India</option>
+            <option value="CPI">Communist Party of India (CPI)</option>
+            <option value="MIM">All India Majlis-e-Ittehadul Muslimeen</option>
+            <option value="CP">Communist Party of India (Marxist)</option>
+            <option value="RPI">Republican Party of India</option>
+            <option value="AAP">Aam Adami Party</option>
+          </select>  
         </div>
         <div class="form-group col-md-4">
           <label for="election2">Election 2</label>
-          <input formControlName = "election2" class="form-control" type="text" id="election2">
+          <select class="form-control" formControlName="election2" >
+            <option value="" selected>---Select Pollitical Party---</option>
+            <option value="BJP">Bharatiya Janata Party (BJP)</option>
+            <option value="SS">Shiv Sena</option>
+            <option value="NCP">Nationalist Congress Party (NCP)</option>
+            <option value="INC">Indian National Congress (INC)</option>
+            <option value="SP">Samajwadi Party (SP)</option>
+            <option value="MNS">Maharashtra Navnirman Sena (MNS)</option>
+            <option value="PWP">Peasants and Workers Party of India</option>
+            <option value="CPI">Communist Party of India (CPI)</option>
+            <option value="MIM">All India Majlis-e-Ittehadul Muslimeen</option>
+            <option value="CP">Communist Party of India (Marxist)</option>
+            <option value="RPI">Republican Party of India</option>
+            <option value="AAP">Aam Adami Party</option>
+          </select> 
         </div>
         <div class="form-group col-md-4">
           <label for="election3">Election 3</label>
-          <input formControlName = "election3" class="form-control" type="text" id="election3">
+          <select class="form-control" formControlName="election3" >
+            <option value="" selected>---Select Pollitical Party---</option>
+            <option value="BJP">Bharatiya Janata Party (BJP)</option>
+            <option value="SS">Shiv Sena</option>
+            <option value="NCP">Nationalist Congress Party (NCP)</option>
+            <option value="INC">Indian National Congress (INC)</option>
+            <option value="SP">Samajwadi Party (SP)</option>
+            <option value="MNS">Maharashtra Navnirman Sena (MNS)</option>
+            <option value="PWP">Peasants and Workers Party of India</option>
+            <option value="CPI">Communist Party of India (CPI)</option>
+            <option value="MIM">All India Majlis-e-Ittehadul Muslimeen</option>
+            <option value="CP">Communist Party of India (Marxist)</option>
+            <option value="RPI">Republican Party of India</option>
+            <option value="AAP">Aam Adami Party</option>
+          </select> 
         </div>
         <div class="form-group col-md-4">
           <label for="election4">Election 4</label>
-          <input formControlName = "election4" class="form-control" type="text" id="election4">
+          <select class="form-control" formControlName="election4" >
+            <option value="" selected>---Select Pollitical Party---</option>
+            <option value="BJP">Bharatiya Janata Party (BJP)</option>
+            <option value="SS">Shiv Sena</option>
+            <option value="NCP">Nationalist Congress Party (NCP)</option>
+            <option value="INC">Indian National Congress (INC)</option>
+            <option value="SP">Samajwadi Party (SP)</option>
+            <option value="MNS">Maharashtra Navnirman Sena (MNS)</option>
+            <option value="PWP">Peasants and Workers Party of India</option>
+            <option value="CPI">Communist Party of India (CPI)</option>
+            <option value="MIM">All India Majlis-e-Ittehadul Muslimeen</option>
+            <option value="CP">Communist Party of India (Marxist)</option>
+            <option value="RPI">Republican Party of India</option>
+            <option value="AAP">Aam Adami Party</option>
+          </select> 
         </div>
         <div class="form-group col-md-4">
           <label for="election5">Election 5</label>
-          <input formControlName = "election5" class="form-control" type="text" id="election5">
+          <select class="form-control" formControlName="election5" >
+            <option value="" selected>---Select Pollitical Party---</option>
+            <option value="BJP">Bharatiya Janata Party (BJP)</option>
+            <option value="SS">Shiv Sena</option>
+            <option value="NCP">Nationalist Congress Party (NCP)</option>
+            <option value="INC">Indian National Congress (INC)</option>
+            <option value="SP">Samajwadi Party (SP)</option>
+            <option value="MNS">Maharashtra Navnirman Sena (MNS)</option>
+            <option value="PWP">Peasants and Workers Party of India</option>
+            <option value="CPI">Communist Party of India (CPI)</option>
+            <option value="MIM">All India Majlis-e-Ittehadul Muslimeen</option>
+            <option value="CP">Communist Party of India (Marxist)</option>
+            <option value="RPI">Republican Party of India</option>
+            <option value="AAP">Aam Adami Party</option>
+          </select> 
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>

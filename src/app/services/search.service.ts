@@ -10,7 +10,7 @@ export class SearchService {
 
   constructor(private http: HttpClient) {}
 
-  search() {
-    return this.http.post(`${this.baseUrl}/search.php`, { data: '' })
+  search(search:any) {
+    return this.http.post(`${this.baseUrl}/search.php`, { data: search })
   }
 }

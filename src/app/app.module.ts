@@ -11,7 +11,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { SearchComponent } from './search/search.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
+import { DashboardGenderComponent } from './dashboard-gender/dashboard-gender.component';
+import { DashboardCasteComponent } from './dashboard-caste/dashboard-caste.component';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,12 +28,22 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     NavbarComponent,
     RegistrationComponent,
     SearchComponent,
+    DashboardComponent,
+    DashboardGenderComponent,
+    DashboardCasteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+  NgxPaginationModule,
+  NgChartsModule,
+  FormsModule,
+  MatFormFieldModule,
+  MatPaginatorModule,
+  MatTableModule
+
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

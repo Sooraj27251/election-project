@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+<div
+  class="shadow p-3 mb-5 bg-white rounded col-md-11"
+  style="margin: auto; margin-top: 2%"
+>
+  <div class="col-xs-1 center-block text-center" style="color: gray">
+    <h2>Dashboard</h2>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <div class="col-md-4">
+        <label>Select Constituency</label>
+        <select
+          class="form-control"
+          [(ngModel)]="constituency"
+          (ngModelChange)="getData()"
+        >
+          <option value ='' selected>---Select Constituency---</option>
+          <option *ngFor="let title of constituencies" [value]="title">
+            {{ title }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+<br>
+<hr>
+<br>
+  <div *ngIf="this.showchart" class="row">
+    <div style="display: block" class="col-md-4">
+      <div class="col-xs-1 center-block text-left" style="color: gray">
+        <h4>Party Chart</h4>
+      </div>  
+      <canvas baseChart [data]="doughnutChartData" [type]="doughnutChartType">
+      </canvas>
+    </div>
+    <div class="col-md-4">
+      <div class="col-xs-1 center-block text-left" style="color: gray">
+        <h4>Gender Chart</h4>
+      </div>  
+      <app-dashboard-gender [consti] = "constituency" #gender></app-dashboard-gender>
+    </div>
+    <div class="col-md-4">
+      <div class="col-xs-1 center-block text-left" style="color: gray">
+        <h4>Caste Chart</h4>
+      </div>  
+      <app-dashboard-caste [consti] = "constituency" #caste></app-dashboard-caste>
+    </div>
+  </div>
+</div>
