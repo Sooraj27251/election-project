@@ -12,3 +12,7 @@ table tbody thead{
 p {
     font-family: Lato;
   }
+
+  a:hover {
+    cursor:pointer;
+   }

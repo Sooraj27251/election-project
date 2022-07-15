@@ -147,10 +147,19 @@
 <div class="table table-striped table-bordered " *ngIf="showTable">
   <table mat-table [dataSource]="dataSource">
 
+    <ng-container matColumnDef="sr">
+      <th mat-header-cell *matHeaderCellDef> Sr. </th>
+      <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click)="openDialog(element.uuid)">Edit</button>
+      </td>
+    </ng-container>
     <!-- Position Column-->
     <ng-container matColumnDef="uuid">
       <th mat-header-cell *matHeaderCellDef> UUID </th>
-      <td mat-cell *matCellDef="let element"> {{element.uuid}} </td>
+      <td mat-cell *matCellDef="let element"><a style="color: royalblue;" (click)="openProfile(element.uuid)">{{element.uuid}} </a></td>
     </ng-container>
 
     <!-- Name Column -->

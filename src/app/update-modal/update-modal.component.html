@@ -1,0 +1,157 @@
+<div #container class="container" class="row modal-body">
+  <div  *ngIf="this.issuccess">
+    <div  class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Success!</strong> Your details updated successfully.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div class="col-xs-1 center-block text-center" style="color: gray">
+    <h2>Update Record</h2>
+  </div>
+  <div class="shadow p-2 mb-5 bg-white rounded col-md-11" style="margin: auto;">
+   
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm)">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="fname">First Name</label>
+          <input type="text" formControlName="fname" class="form-control" id="fname" placeholder="First Name"
+          [ngClass]="{ 'is-invalid': issubmit && form.fname.errors }" [(ngModel)]="formdata.fname"
+          >
+          <div *ngIf="issubmit && form.fname.errors" class="invalid-feedback">
+            <div *ngIf="form.fname.errors.required">First name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="mname">Middle Name</label>
+          <input type="text" formControlName="mname" class="form-control" id="mname" placeholder="Middle Name" [(ngModel)]="formdata.mname" >
+        </div>
+        <div class="form-group col-md-4">
+          <label for="lname">Last Name</label>
+          <input type="text" formControlName="lname" class="form-control" id="lname" placeholder="Last Name" [ngClass]="{ 'is-invalid': issubmit && form.lname.errors }" [(ngModel)]="formdata.lname">
+          <div *ngIf="issubmit && form.lname.errors" class="invalid-feedback">
+            <div *ngIf="form.lname.errors.required">Last name is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="gender">Gender</label>
+          <select class="form-control" formControlName="gender" [(ngModel)]="formdata.gender">
+            <option class="option" value={{formdata.gender}} selected>{{formdata.gender}}</option>
+            <option class='option' *ngFor='let option of genderlist' [value]="option">{{option}}</option>
+        </select>  
+        </div>
+        <div class="form-group col-md-4">
+          <label for="age">Age</label>
+          <input type="number" formControlName="age" class="form-control" id="age" placeholder="Age" [(ngModel)]="formdata.age">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="caste">Caste</label>
+          <input type="text" formControlName = "caste" class="form-control" id="caste" placeholder="Caste" [(ngModel)]="formdata.caste"> 
+        </div>
+        <div class="form-group col-md-4">
+          <label for="occupation">Occupation</label>
+          <input type="text" formControlName = "occupation" class="form-control" placeholder="Occupation" [(ngModel)]="formdata.occupation">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="disctrict">District</label>
+          <select class="form-control" formControlName = "district" [(ngModel)]="formdata.district" (ngModelChange)="getData()">
+          <option value ={{formdata.district}} selected>{{formdata.district}}</option>
+          <option *ngFor="let title of districts" [value]="title">{{ title }}</option>
+        </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="constituency">Constituency</label>
+          <select class="form-control" formControlName = "constituency" [(ngModel)]="formdata.constituency" (ngModelChange)="$event">
+            <option value ={{formdata.constituency}} selected>{{formdata.constituency}}</option>
+            <option *ngFor="let title of constituencies" [value]="title">{{ title }}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="village">Village</label>
+          <input type="text" formControlName = "village" class="form-control" placeholder="Village" [(ngModel)]="formdata.village">
+        </div>
+        
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="address">Address</label>
+          <input type="text" formControlName="address" class="form-control" id="address"
+            placeholder="Please Enter Address" [(ngModel)]="formdata.address">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <!-- Default switch -->
+          <div class="custom-control custom-switch">
+            <input type="checkbox" formControlName="pollitical" class="custom-control-input" id="pollitical" [(ngModel)]="formdata.pollitical">
+            <label class="custom-control-label" for="pollitical">Pollitically active</label>
+          </div>
+        </div>
+      </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+              <label for="polliticalParty">Pollitical Party</label>
+              <select class="form-control" formControlName="polliticalParty" [(ngModel)]="formdata.party" (ngModelChange)="$event">
+                <option *ngFor="let title of partylist, let i = index" value={{title.sf}}>{{ title.ff }}</option>
+              </select>  
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="about">About Infromation</label>
+            <textarea formControlName = "about" class="form-control" id="about" [(ngModel)]="formdata.about"></textarea>
+          </div>
+        </div>
+
+        <label>Previous Election Prefernces</label>
+
+        <div class="form-group col-md-4">
+          <label for="election1">Election 1</label>
+          <select class="form-control" formControlName="election1" [(ngModel)]="formdata.election1" (ngModelChange)="$event">
+            <option *ngFor="let title of partylist, let i = index" value={{title.sf}}>{{ title.ff }}</option>
+          </select>  
+        </div>
+        <div class="form-group col-md-4">
+          <label for="election2">Election 2</label>
+          <select class="form-control" formControlName="election2" [(ngModel)]="formdata.election2" (ngModelChange)="$event">
+            <option *ngFor="let title of partylist, let i = index" value={{title.sf}}>{{ title.ff }}</option>
+          </select> 
+        </div>
+        <div class="form-group col-md-4">
+          <label for="election3">Election 3</label>
+          <select class="form-control" formControlName="election3" [(ngModel)]="formdata.election3" (ngModelChange)="$event">
+            <option *ngFor="let title of partylist, let i = index" value={{title.sf}}>{{ title.ff }}</option>
+          </select> 
+        </div>
+        <div class="form-group col-md-4">
+          <label for="election4">Election 4</label>
+          <select class="form-control" formControlName="election4" [(ngModel)]="formdata.election4" (ngModelChange)="$event">
+            <option *ngFor="let title of partylist, let i = index" value={{title.sf}}>{{ title.ff }}</option>
+          </select> 
+        </div>
+        <div class="form-group col-md-4">
+          <label for="election5">Election 5</label>
+          <select class="form-control" formControlName="election5" [(ngModel)]="formdata.election5" (ngModelChange)="$event">
+            <option *ngFor="let title of partylist, let i = index" value={{title.sf}}>{{ title.ff }}</option>
+          </select> 
+        </div>
+        <div class="row">
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-success" (click)="container.scrollTop = 0">Update</button>
+          </div>
+          <div class="col-md-2">
+            <button style="float: left;" mat-raised-button color="warn" (click)="closemodal()">Close</button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>

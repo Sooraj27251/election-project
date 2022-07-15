@@ -13,4 +13,8 @@ export class RegistrationService {
   register(login: any) {
     return this.http.post(`${this.baseUrl}/registration.php`, { data: login })
   }
+
+  update(login: any) {
+    return this.http.post(`${this.baseUrl}/updaterecord.php`, { data: login })
+  }
 }

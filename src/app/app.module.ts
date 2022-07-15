@@ -20,6 +20,12 @@ import { DashboardCasteComponent } from './dashboard-caste/dashboard-caste.compo
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { UpdateModalComponent } from './update-modal/update-modal.component';
+import { MatButtonModule } from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileComponent } from './profile/profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +36,9 @@ import { MatTableModule } from '@angular/material/table';
     SearchComponent,
     DashboardComponent,
     DashboardGenderComponent,
-    DashboardCasteComponent
+    DashboardCasteComponent,
+    UpdateModalComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +50,10 @@ import { MatTableModule } from '@angular/material/table';
   FormsModule,
   MatFormFieldModule,
   MatPaginatorModule,
-  MatTableModule
+  MatTableModule,
+  MatButtonModule,
+  MatDialogModule,
+  BrowserAnimationsModule
 
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],

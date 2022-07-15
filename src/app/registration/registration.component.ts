@@ -61,6 +61,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   getData(){
+    this.constituencies = [];
     this.dropservice.getConstituency(this.district).subscribe((data:any)=>{
       for (let obj of data) {
         for (let key in obj) {

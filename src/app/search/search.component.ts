@@ -4,6 +4,10 @@ import { SearchService } from '../services/search.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { DashboardService } from '../services/dashboard.service';
+import { UpdateModalComponent } from '../update-modal/update-modal.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ProfileComponent } from '../profile/profile.component';
+
 
 @Component({
   selector: 'app-search',
@@ -14,7 +18,8 @@ export class SearchComponent implements OnInit {
   
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-  constructor(private service:SearchService, private fb:FormBuilder, private dashboardservice:DashboardService,private cd: ChangeDetectorRef) { }
+
+  constructor(public dialog: MatDialog,private service:SearchService, private fb:FormBuilder, private dashboardservice:DashboardService,private cd: ChangeDetectorRef) { }
 
   search:FormGroup;
   searchResult:any;
@@ -23,7 +28,7 @@ export class SearchComponent implements OnInit {
   ResultNotFound:boolean = false;
   constituencies: Array<String> = [];
 
-  displayedColumns: string[] = ['uuid', 'name','gender',
+  displayedColumns: string[] = ['sr','action','uuid', 'name','gender',
   'age','caste','occupation','constituency','village','address','pollitical','party','electionPrefrences'];
 
   
@@ -51,6 +56,28 @@ export class SearchComponent implements OnInit {
       pollitical:['']
     });
       
+  }
+
+  openDialog(uuid:any): void {
+    const dialogRef = this.dialog.open(UpdateModalComponent, {
+      width: '90%',
+      data: {uuid:uuid}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openProfile(uuid:any): void {
+    const dialogRef = this.dialog.open(ProfileComponent, {
+      width: '90%',
+      data: {uuid:uuid}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   onSubmit(search:FormGroup){
