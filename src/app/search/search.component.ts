@@ -7,6 +7,7 @@ import { DashboardService } from '../services/dashboard.service';
 import { UpdateModalComponent } from '../update-modal/update-modal.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ProfileComponent } from '../profile/profile.component';
+import { ExportService } from '../services/export.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class SearchComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
 
-  constructor(public dialog: MatDialog,private service:SearchService, private fb:FormBuilder, private dashboardservice:DashboardService,private cd: ChangeDetectorRef) { }
+  constructor(private exportservice:ExportService, public dialog: MatDialog,private service:SearchService, private fb:FormBuilder, private dashboardservice:DashboardService,private cd: ChangeDetectorRef) { }
 
   search:FormGroup;
   searchResult:any;
@@ -80,6 +81,9 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  exportdata(){
+    this.exportservice.exportExcel(this.searchResult);
+  }
   onSubmit(search:FormGroup){
     console.log(search.value)
     this.ResultNotFound = false;

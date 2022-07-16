@@ -39,7 +39,7 @@ export class UpdateModalComponent implements OnInit {
     { sf: 'AAP', ff: 'Aam Adami Party' }
   ];
   district: any = '';
-  formdata: any ;
+  formdata: any;
   ngOnInit(): void {
 
     this.service.getuserdetail(this.data.uuid).subscribe((data: any) => {

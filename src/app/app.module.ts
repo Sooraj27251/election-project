@@ -25,6 +25,17 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './profile/profile.component';
+import { DatePipe } from '@angular/common';
+
+import {MatCardModule} from '@angular/material/card';
+import {MatListModule} from '@angular/material/list';
+import { MatChipsModule} from '@angular/material/chips';
+import { MatInputModule} from '@angular/material/input';
+import { MatExpansionModule} from '@angular/material/expansion';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatIconModule}  from '@angular/material/icon'; 
 
 @NgModule({
   declarations: [
@@ -41,6 +52,16 @@ import { ProfileComponent } from './profile/profile.component';
     ProfileComponent
   ],
   imports: [
+    MatCardModule,
+    MatListModule,
+    MatButtonModule,
+    MatInputModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    MatChipsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -56,7 +77,7 @@ import { ProfileComponent } from './profile/profile.component';
   BrowserAnimationsModule
 
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
