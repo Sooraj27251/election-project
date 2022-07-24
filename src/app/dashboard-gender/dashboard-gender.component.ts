@@ -13,11 +13,11 @@ export class DashboardGenderComponent implements OnInit {
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  constituency:string;
+  dashboarddata:any;
 
   constructor(private dashboardserivce : DashboardService) { }
   @Input() set consti(value:any) {
-    this.constituency = value;
+    this.dashboarddata = value;
     this.getData();
   }
 
@@ -47,9 +47,9 @@ export class DashboardGenderComponent implements OnInit {
     this.labelList = [];
     this.countList = [{ data: [] }];
     this.countarry = [];
-
+  
     this.dashboardserivce
-      .getGenderDashboard(this.constituency)
+      .getGenderDashboard(this.dashboarddata)
       .subscribe((data: any) => {
         for (
           this.index = 0;

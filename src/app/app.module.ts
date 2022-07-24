@@ -35,7 +35,8 @@ import { MatExpansionModule} from '@angular/material/expansion';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { MatIconModule}  from '@angular/material/icon'; 
+import { MatIconModule}  from '@angular/material/icon';
+import { DeleteCompComponent } from './delete-comp/delete-comp.component'; 
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { MatIconModule}  from '@angular/material/icon';
     DashboardGenderComponent,
     DashboardCasteComponent,
     UpdateModalComponent,
-    ProfileComponent
+    ProfileComponent,
+    DeleteCompComponent
   ],
   imports: [
     MatCardModule,

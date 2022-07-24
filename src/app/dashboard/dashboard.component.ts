@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { DashboardGenderComponent } from '../dashboard-gender/dashboard-gender.component';
@@ -11,13 +11,20 @@ import { DashboardService } from '../services/dashboard.service';
 export class DashboardComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   
-  constructor(private dashboardserivce: DashboardService) {}
+  constructor(private dashboardserivce: DashboardService,private cd: ChangeDetectorRef) {}
 
   showchart: boolean = false;
 
+  dashboarddata:any ={
+    constituency:'',
+    village:''
+  };
+
   constituency: String = '';
+  village:String = '';
 
   constituencies: Array<String> = [];
+  villages:Array<String> = [];
 
   labelList: Array<String> = [];
   countList: any = [{ data: [] }];
@@ -43,12 +50,21 @@ export class DashboardComponent implements OnInit {
   }
 
   public getData() {
+    this.villages = [];
+    this.dashboardserivce.getVillageData(this.constituency).subscribe((data:any)=>{
+      for(let obj of data){
+        this.villages.push(obj.village);
+      }
+    });
     this.labelList = [];
     this.countList = [{ data: [] }];
     this.countarry = [];
-
+    this.dashboarddata = {
+      constituency:this.constituency,
+      village:this.village
+    }
     this.dashboardserivce
-      .getDashBoardData(this.constituency)
+      .getDashBoardData(this.dashboarddata)
       .subscribe((data: any) => {
         for (
           this.index = 0;

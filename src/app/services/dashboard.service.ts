@@ -16,6 +16,11 @@ export class DashboardService {
     
   }
 
+  getVillageData(search:any){
+    
+    return this.http.post(`${this.baseUrl}/getvillagebyconstituency.php`, { data: search })
+  
+}
   getConstituency(){
     return this.http.get(`${this.baseUrl}/constituency.php`)
   }

@@ -8,6 +8,7 @@ import { UpdateModalComponent } from '../update-modal/update-modal.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ProfileComponent } from '../profile/profile.component';
 import { ExportService } from '../services/export.service';
+import { DeleteCompComponent } from '../delete-comp/delete-comp.component';
 
 
 @Component({
@@ -70,6 +71,16 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  deleteDailog(uuid:any):void{
+    const deletedailogref = this.dialog.open(DeleteCompComponent,{
+      width : '50%',
+      data:{uuid:uuid}
+    });
+
+    deletedailogref.afterClosed().subscribe(result=>{
+      console.log('delete dailog close');
+    })
+  }
   openProfile(uuid:any): void {
     const dialogRef = this.dialog.open(ProfileComponent, {
       width: '90%',
