@@ -13,11 +13,16 @@ export class ProfileComponent implements OnInit {
   @Inject(MAT_DIALOG_DATA) public data: any, private service: UpdateService) { }
 
   formdata:any;
+  relativeList:any;
 
   ngOnInit(): void {
 
     this.service.getuserdetail(this.data.uuid).subscribe((data: any) => {
       this.formdata = data[0];
+      console.log("inside "+data[0]);
+      console.log(JSON.parse(this.formdata.relatives));
+      this.relativeList = JSON.parse(this.formdata.relatives);
+      console.log("inside userdetail "+this.relativeList[0]);
     });
   }
 

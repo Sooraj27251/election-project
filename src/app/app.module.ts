@@ -36,7 +36,9 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatIconModule}  from '@angular/material/icon';
-import { DeleteCompComponent } from './delete-comp/delete-comp.component'; 
+import { DeleteCompComponent } from './delete-comp/delete-comp.component';
+import { RelativeComponent } from './relative/relative.component';
+import { AddRelativeComponent } from './add-relative/add-relative.component'; 
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { DeleteCompComponent } from './delete-comp/delete-comp.component';
     DashboardCasteComponent,
     UpdateModalComponent,
     ProfileComponent,
-    DeleteCompComponent
+    DeleteCompComponent,
+    RelativeComponent,
+    AddRelativeComponent
   ],
   imports: [
     MatCardModule,

@@ -1,0 +1,17 @@
+<div class="col-xs-1 center-block text-center" style="color: gray">
+    <h2>Add Relation with {{this.selfName}}</h2>
+  </div>
+
+<div>
+
+    <form  [formGroup]="form" (ngSubmit)="onSubmit(form)">
+        <div class="form-group col-md-6">
+            <label for="relation">{{this.relativeName +" is:"}}</label>
+            <input formControlName="relation" class="form-control" placeholder="Enter Relation"/>
+        </div>
+        <button type="submit" mat-raised-button color="primary"  [disabled]="myform.relation.errors">Add to relatives</button>
+    </form>
+    <br>
+    <button mat-raised-button color="warn" (click)="closeDailog()" >Close</button>
+
+</div>
