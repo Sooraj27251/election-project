@@ -1,97 +1,78 @@
 <div class="ScrollStyle">
-<div
-  style="margin: auto; margin-top: 2%"
->
-  <div class="col-xs-1 center-block text-center" style="color: gray">
-    <h2>Add Relative</h2>
-  </div>
-  <form [formGroup]="search" (ngSubmit)="onSubmit(search)">
-    <div class="row">
-      <div class="form-group col-md-3">
-        <label for="uuid">UUID</label>
-        <input
-          formControlName="uuid"
-          class="form-control"
-          placeholder="Enter UUID"
-        />
-      </div>
-
-      <div class="form-group col-md-3">
-        <label for="uuid">First Name</label>
-        <input
-          formControlName="fname"
-          class="form-control"
-          placeholder="Enter First Name"
-        />
-      </div>
-      <div class="form-group col-md-3">
-        <label for="uuid">Middle Name</label>
-        <input
-          formControlName="mname"
-          class="form-control"
-          placeholder="Enter Middle Name"
-        />
-      </div>
-      <div class="form-group col-md-3">
-        <label for="uuid">Last Name</label>
-        <input
-          formControlName="lname"
-          class="form-control"
-          placeholder="Enter Last Name"
-        />
-      </div>
+  <div style="margin: auto; margin-top: 2%">
+    <div class="col-xs-1 center-block text-center" style="color: gray">
+      <h2>Add Relative</h2>
     </div>
-    <div class="row form-group">
+    <form [formGroup]="search" (ngSubmit)="onSubmit(search)">
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label for="uuid">UUID</label>
+          <input formControlName="uuid" class="form-control" placeholder="Enter UUID" />
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="uuid">First Name</label>
+          <input formControlName="fname" class="form-control" placeholder="Enter First Name" />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="uuid">Middle Name</label>
+          <input formControlName="mname" class="form-control" placeholder="Enter Middle Name" />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="uuid">Last Name</label>
+          <input formControlName="lname" class="form-control" placeholder="Enter Last Name" />
+        </div>
+      </div>
+      <div class="row form-group">
         <div class="col-sm-10">
           <button type="submit" class="btn btn-primary">Search</button>
         </div>
         <div class="col-sm-1">
           <button type="reset" class="btn btn-danger" (click)="clearTable()">Clear</button>
         </div>
-        
-      </div>
-  </form>
-</div>
 
-<div class="table table-striped table-bordered " *ngIf="showTable">
+      </div>
+    </form>
+  </div>
+
+  <div class="table table-striped table-bordered " *ngIf="showTable">
     <table style="width: 100%;" mat-table [dataSource]="dataSource">
-  
+
       <ng-container matColumnDef="sr">
         <th mat-header-cell *matHeaderCellDef> Sr. </th>
         <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
       </ng-container>
-      
+
       <!-- Position Column-->
       <ng-container matColumnDef="uuid">
         <th mat-header-cell *matHeaderCellDef> UUID </th>
         <td mat-cell *matCellDef="let element"><a style="color: royalblue;">{{element.uuid}} </a></td>
       </ng-container>
-  
+
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element"> {{element.fname+" " +element.mname+" "+element.lname}} </td>
       </ng-container>
-  
+
       <ng-container matColumnDef="village">
         <th mat-header-cell *matHeaderCellDef> Village </th>
         <td mat-cell *matCellDef="let element"> {{element.village}} </td>
       </ng-container>
-      
+
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let element">
-            <button mat-raised-button color="primary" (click)="addRelative(element.uuid)">Add to Relative</button>
+          <button mat-raised-button color="primary" (click)="addRelative(element.uuid)">Add to Relative</button>
         </td>
       </ng-container>
-  
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    
-    <mat-paginator [pageSizeOptions]="[25]"
-    showFirstLastButtons>
-  </mat-paginator>
+
+    <mat-paginator [pageSizeOptions]="[25]" showFirstLastButtons>
+    </mat-paginator>
   </div>
-  </div>
-  
+  <button mat-raised-button color="warn" (click)="closeDailog()">Close</button>
+</div>

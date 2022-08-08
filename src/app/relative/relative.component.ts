@@ -66,6 +66,10 @@ export class RelativeComponent implements OnInit {
     });
   }
 
+  closeDailog(){
+    this.dialogRef.close();
+  }
+  
   clearTable(): void {
     this.showTable = false;
   }

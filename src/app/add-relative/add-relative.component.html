@@ -1,3 +1,12 @@
+<div  *ngIf="this.issubmit">
+    <div  class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Success!</strong> Your details updated successfully.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
 <div class="col-xs-1 center-block text-center" style="color: gray">
     <h2>Add Relation with {{this.selfName}}</h2>
   </div>
@@ -9,7 +18,7 @@
             <label for="relation">{{this.relativeName +" is:"}}</label>
             <input formControlName="relation" class="form-control" placeholder="Enter Relation"/>
         </div>
-        <button type="submit" mat-raised-button color="primary"  [disabled]="myform.relation.errors">Add to relatives</button>
+        <button *ngIf="!this.issubmit" type="submit" mat-raised-button color="primary"  [disabled]="myform.relation.errors">Add to relatives</button>
     </form>
     <br>
     <button mat-raised-button color="warn" (click)="closeDailog()" >Close</button>

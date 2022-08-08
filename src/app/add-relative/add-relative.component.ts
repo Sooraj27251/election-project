@@ -20,7 +20,13 @@ export class AddRelativeComponent implements OnInit {
   relativeName:any;
   relativesArray:Array<Relative> = [];
   relativeObj:Relative;
+  issubmit:boolean = false;
 
+  searchResult: any;
+  showTable: boolean = false;
+  dataSource: any;
+  ResultNotFound: boolean = false;
+  
   ngOnInit(): void {
 
     this.updtservice.getuserdetail(this.data.ouuid).subscribe((data:any)=>{
@@ -50,11 +56,9 @@ export class AddRelativeComponent implements OnInit {
   }
 
   onSubmit(form:any){
-
-
     this.relativesArray.push({uuid:this.data.nuuid,relatives:this.form.value.relation,name:this.relativeName})
     this.relativeservice.addRelative(this.data.ouuid, JSON.stringify(this.relativesArray)).subscribe(data=>{
-      console.log(data);
+      this.issubmit = true;
     })
   }
 }
