@@ -19,6 +19,7 @@ export class AddRelativeComponent implements OnInit {
   selfName:any;
   relativeName:any;
   relativesArray:Array<Relative> = [];
+  otherRelativesArray:Array<Relative> = [];
   relativeObj:Relative;
   issubmit:boolean = false;
 
