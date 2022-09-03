@@ -61,6 +61,7 @@ export class UpdateModalComponent implements OnInit {
     this.registrationForm = this.fb.group({
       fname: ['', Validators.required],
       mname: [''],
+      hname: [''],
       lname: ['', Validators.required],
       gender: [''],
       age: ['', range(0, 999)],

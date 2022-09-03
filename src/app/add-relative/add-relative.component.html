@@ -25,7 +25,7 @@
     </div>
 
     <button *ngIf="!this.issubmit" type="submit" mat-raised-button color="primary"
-      [disabled]="myform.relation.errors">Add to relatives</button>
+      [disabled]="myform.relation1.errors || myform.relation2.errors" >Add to relatives</button>
   </form>
   <br>
   <button mat-raised-button color="warn" (click)="closeDailog()">Close</button>

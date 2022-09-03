@@ -43,8 +43,13 @@ export class AddRelativeComponent implements OnInit {
       this.relativesArray = JSON.parse(data[0].relatives);
     })    
 
+    this.relativeservice.getRelative(this.data.nuuid).subscribe((data:any)=>{
+      this.otherRelativesArray = JSON.parse(data[0].relatives);
+    })
+
     this.form = this.fb.group({
-      relation:['',Validators.required]
+      relation1:['',Validators.required],
+      relation2:['',Validators.required]
     })
   }
 
@@ -57,8 +62,13 @@ export class AddRelativeComponent implements OnInit {
   }
 
   onSubmit(form:any){
-    this.relativesArray.push({uuid:this.data.nuuid,relatives:this.form.value.relation,name:this.relativeName})
+    this.relativesArray.push({uuid:this.data.nuuid,relatives:this.form.value.relation1,name:this.relativeName})
     this.relativeservice.addRelative(this.data.ouuid, JSON.stringify(this.relativesArray)).subscribe(data=>{
+      this.issubmit = true;
+    })
+
+    this.otherRelativesArray.push({uuid:this.data.ouuid,relatives:this.form.value.relation2,name:this.selfName})
+    this.relativeservice.addRelative(this.data.nuuid, JSON.stringify(this.otherRelativesArray)).subscribe(data=>{
       this.issubmit = true;
     })
   }
