@@ -46,7 +46,8 @@ export class RelativeComponent implements OnInit {
       constituency: [''],
       polliticalParty: [''],
       village: [''],
-      pollitical: ['']
+      pollitical: [''],
+      religion:['']
     })
   }
 

@@ -25,6 +25,10 @@
           </div>
         </div>
         <div class="form-group col-md-4">
+          <label for="mname">Fathers Name</label>
+          <input type="text" formControlName="mname" class="form-control" id="mname" placeholder="Father Name">
+        </div>
+        <div class="form-group col-md-4">
           <label for="lname">Last Name</label>
           <input type="text" formControlName="lname" class="form-control" id="lname" placeholder="Last Name" [ngClass]="{ 'is-invalid': issubmit && form.lname.errors }">
           <div *ngIf="issubmit && form.lname.errors" class="invalid-feedback">
@@ -34,15 +38,9 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
-          <label for="mname">Fathers Name</label>
-          <input type="text" formControlName="mname" class="form-control" id="mname" placeholder="Father Name">
-        </div>
-        <div class="form-group col-md-4">
           <label for="hname">Spouse Name</label>
           <input type="text" formControlName="hname" class="form-control" id="hname" placeholder="Spouse Name">
         </div>
-      </div>
-      <div class="form-row">
         <div class="form-group col-md-4">
           <label for="gender">Gender</label>
           <select class="form-control" formControlName="gender" >
@@ -56,8 +54,13 @@
           <label for="age">Age</label>
           <input type="number" formControlName="age" class="form-control" id="age" placeholder="Age">
         </div>
+ 
       </div>
       <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="caste">Religion</label>
+          <input type="text" formControlName = "religion" class="form-control" id="religion" placeholder="Religion"> 
+        </div>
         <div class="form-group col-md-4">
           <label for="caste">Caste</label>
           <input type="text" formControlName = "caste" class="form-control" id="caste" placeholder="Caste"> 

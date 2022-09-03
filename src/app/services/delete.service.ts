@@ -1,16 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { baseUrl } from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeleteService {
 
-  baseUrl = 'http://localhost/electionproject';
-
   constructor(private http: HttpClient) {}
 
   deleteuser(search:any) {
-    return this.http.post(`${this.baseUrl}/deleterecord.php`, { data: search })
+    return this.http.post(`${baseUrl}/deleterecord.php`, { data: search })
   }
 }

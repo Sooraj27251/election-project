@@ -130,6 +130,12 @@
       </div>
     </div>
     
+    <div class="row">
+      <div class="col-md-3">
+        <label for="religion">Religion</label>
+        <input formControlName="religion" class="form-control" placeholder="Enter Religion" type="text">
+      </div>
+    </div>
       
     <br>
     <div class="row form-group">
@@ -164,7 +170,14 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.fname+" " +element.mname+" "+element.lname}} </td>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.hname!=''">
+          {{element.fname+" " +element.hname+" "+element.lname}}
+        </div>
+        <div *ngIf="element.hname == ''">
+          {{element.fname+" " +element.mname+" "+element.lname}}
+        </div>
+      </td>
     </ng-container>
 
     <!-- Weight Column -->
@@ -177,6 +190,11 @@
     <ng-container matColumnDef="age">
       <th mat-header-cell *matHeaderCellDef> Age </th>
       <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="religion">
+      <th mat-header-cell *matHeaderCellDef> Religion </th>
+      <td mat-cell *matCellDef="let element"> {{element.religion}} </td>
     </ng-container>
 
     <ng-container matColumnDef="caste">

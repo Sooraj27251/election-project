@@ -65,6 +65,7 @@ export class UpdateModalComponent implements OnInit {
       lname: ['', Validators.required],
       gender: [''],
       age: ['', range(0, 999)],
+      religion:[''],
       caste: [''],
       occupation: [''],
       district: [''],

@@ -1,16 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { baseUrl } from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UpdateService {
 
-  baseUrl = 'http://localhost/electionproject';
-
   constructor(private http: HttpClient) {}
 
   getuserdetail(search:any) {
-    return this.http.post(`${this.baseUrl}/getuserdetails.php`, { data: search })
+    return this.http.post(`${baseUrl}/getuserdetails.php`, { data: search })
   }
 }

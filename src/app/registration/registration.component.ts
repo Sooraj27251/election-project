@@ -39,6 +39,7 @@ export class RegistrationComponent implements OnInit {
       hname:[''],
       gender:[''],
       age:['',range(0,999)],
+      religion:[''],
       caste:[''],
       occupation:[''],
       district:[''],

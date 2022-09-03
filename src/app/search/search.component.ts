@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit {
   constituencies: Array<String> = [];
 
   displayedColumns: string[] = ['sr', 'uuid', 'name', 'gender',
-    'age', 'caste', 'occupation', 'constituency', 'village', 'address', 'pollitical', 'party', 'electionPrefrences', 'action'];
+    'age','religion', 'caste', 'occupation', 'constituency', 'village', 'address', 'pollitical', 'party', 'electionPrefrences', 'action'];
 
 
   ngOnInit(): void {
@@ -56,7 +56,8 @@ export class SearchComponent implements OnInit {
       constituency: [''],
       polliticalParty: [''],
       village: [''],
-      pollitical: ['']
+      pollitical: [''],
+      religion:['']
     });
 
   }
